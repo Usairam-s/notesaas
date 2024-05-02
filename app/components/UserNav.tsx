@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import Link from "next/link";
 import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs";
+
 export const NavItems = [
   {
     name: "Home",
@@ -29,6 +30,7 @@ export const NavItems = [
     icon: CreditCard,
   },
 ];
+
 function UserNav({
   name,
   email,
@@ -53,7 +55,10 @@ function UserNav({
           <DropdownMenuItem className="text-gray-500">{email}</DropdownMenuItem>
           <DropdownMenuSeparator />
           {NavItems.map((item, index) => (
-            <DropdownMenuItem className="flex justify-between items-center">
+            <DropdownMenuItem
+              key={index}
+              className="flex justify-between items-center"
+            >
               <Link href={item.href}>{item.name}</Link>
               <item.icon />
             </DropdownMenuItem>
