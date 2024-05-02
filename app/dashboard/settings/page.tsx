@@ -86,7 +86,6 @@ export default async function DashboardSetting() {
 
     revalidatePath("/", "layout");
   }
-  ////
 
   async function createSubscription() {
     "use server";
@@ -138,7 +137,7 @@ export default async function DashboardSetting() {
             <CardHeader className="w-full">
               <CardTitle>General Settings</CardTitle>
               <CardDescription>
-                Your personal information. Please don't forget to save.
+                Your personal information. Please don&apos;t forget to save.
               </CardDescription>
             </CardHeader>
             <CardContent className="w-full flex flex-col gap-6">
@@ -190,7 +189,6 @@ export default async function DashboardSetting() {
     );
   }
 
-  ////
   return (
     <div className="flex flex-col w-full">
       <div className="flex flex-col gap-1">
@@ -203,7 +201,7 @@ export default async function DashboardSetting() {
           <CardHeader className="w-full">
             <CardTitle>General Settings</CardTitle>
             <CardDescription>
-              Your personal information. Please don't forget to save.
+              Your personal information. Please don&apos;t forget to save.
             </CardDescription>
           </CardHeader>
           <CardContent className="w-full flex flex-col gap-6">
