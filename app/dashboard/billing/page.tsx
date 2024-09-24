@@ -16,6 +16,7 @@ import {
   StripePortal,
   StripeSubscriptionCreationButton,
 } from "@/components/SubmitButtons";
+import { requireUser } from "@/app/utils/requireUser";
 
 const featureItems = [
   { name: "Lorem Ipsum something" },
@@ -46,8 +47,7 @@ async function getData(userId: string) {
 }
 
 export default async function page() {
-  const { getUser } = getKindeServerSession();
-  const user = await getUser();
+  const user = await requireUser();
   const data = await getData(user?.id as string);
 
   async function createSubscription() {

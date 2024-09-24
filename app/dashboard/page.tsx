@@ -7,6 +7,7 @@ import { Card } from "@/components/ui/card";
 
 import { revalidatePath, unstable_noStore as noStore } from "next/cache";
 import { TrashDelete } from "@/components/SubmitButtons";
+import { requireUser } from "../utils/requireUser";
 
 async function getData(userId: string) {
   noStore();
@@ -40,8 +41,7 @@ async function getData(userId: string) {
 }
 
 export default async function DashboardPage() {
-  const { getUser } = getKindeServerSession();
-  const user = await getUser();
+  const user = await requireUser();
   const data = await getData(user?.id as string);
 
   async function deleteNote(formData: FormData) {

@@ -15,6 +15,7 @@ import SubmitButtons from "@/components/SubmitButtons";
 import prisma from "@/db/db";
 import { revalidatePath } from "next/cache";
 import Link from "next/link";
+import { requireUser } from "@/app/utils/requireUser";
 
 async function getData(userId: string) {
   const data = await prisma.user.findUnique({
@@ -45,8 +46,7 @@ async function IfPremium(userId: string) {
 }
 
 export default async function page() {
-  const { getUser } = getKindeServerSession();
-  const user = await getUser();
+  const user = await requireUser();
   const data = await getData(user?.id as string);
   const premium = await IfPremium(user?.id as string);
   const isActive = premium?.status == "active";
