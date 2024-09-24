@@ -7,7 +7,6 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -66,7 +65,10 @@ export default async function page() {
     }
     const subscriptionUrl = await getStripeSession({
       customerId: dbUser.stripeCustomerId,
-      domainUrl: "http://localhost:3000",
+      domainUrl:
+        process.env.NODE_ENV === "production"
+          ? "https://saasnote.vercel.app"
+          : "http://localhost:3000",
       priceId: process.env.STRIPE_PRICE_ID as string,
     });
 
@@ -79,8 +81,8 @@ export default async function page() {
       customer: data?.user.stripeCustomerId as string,
       return_url:
         process.env.NODE_ENV === "production"
-          ? (process.env.PRODUCTION_URL as string)
-          : "http://localhost:3000/dashboard",
+          ? "https://saasnote.vercel.app"
+          : "http://localhost:3000",
     });
 
     return redirect(session.url);

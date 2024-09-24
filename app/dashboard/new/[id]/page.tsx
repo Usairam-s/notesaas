@@ -16,6 +16,7 @@ import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { redirect } from "next/navigation";
 import { revalidatePath, unstable_noStore as noStore } from "next/cache";
 import SubmitButtons from "@/components/SubmitButtons";
+import { requireUser } from "@/app/utils/requireUser";
 
 async function getData({ userId, noteId }: { userId: string; noteId: string }) {
   noStore();
@@ -39,8 +40,7 @@ export default async function DynamicRoute({
 }: {
   params: { id: string };
 }) {
-  const { getUser } = getKindeServerSession();
-  const user = await getUser();
+  const user = await requireUser();
   const data = await getData({ userId: user?.id as string, noteId: params.id });
 
   async function postData(formData: FormData) {
